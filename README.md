@@ -1,61 +1,71 @@
-<div align="center">
-  <h1>
-     🐤 미니 사전과제 #2 스톱워치
-  </h1>
-  <strong>FastCampus 강의 - <a href="https://fastcampus.co.kr/dev_online_fefinal">30개 프로젝트로 배우는
-프론트엔드 웹 개발 (with React)</a>를 위한 자료입니다.</strong>
-</div>
+**타이머 모듈 설명 (src/stopwatch.js) ⏰**
 
-## 📑 Get Started
+**모듈 상태 (멤버 변수)**
 
-### 1) 보일러 플레이트 코드 확인하기
+| 상태 이름 | 설명 |
+| --- | --- |
+| _interval | start() 시 실행되는 [setInterval](https://developer.mozilla.org/en-US/docs/Web/API/setInterval)이 리턴하는 intervalID |
+| _centisecond | 현재 스톱워치의 시간 (단위: centisecond) |
+| _lapCount | 현재 스톱워치의 누적 Lap 갯수 |
+| _prevLap | 직전 Lap 시간 |
 
-Vanilla JS 버전 사전 과제 작성을 위한 보일러 플레이트 코드는, 본 저장소의 `main` 브랜치에 업로드 되어 있습니다.
+**모듈 메소드 (함수)**
 
-1. 본 저장소를 fork 하거나, ZIP 파일로 다운로드 받은 후
-2. 아래 명령어로 의존성 라이브러리들을 설치해주세요.
+| 메소드 이름 | 기능 | 리턴값 |
+| --- | --- | --- |
+| centisecond | 현재 centisecond 값 가져오기 | _centisecond |
+| start | 스톱워치 시작하기 | null |
+| pause | 스톱워치 중단(일시정지)하기 | null |
+| createLap | 스톱워치 Lap 생성하기 | [_lapCount, 현재 Lap 시간] |
+| reset | 스톱워치 리셋하기 | null |
 
-```bash
-npm install
-# 또는
-yarn install
-```
+**요구사항 ✅**
 
-3. src/index.js 파일에 답안을 작성해주세요.
+**1. 시작, 중단 기능**
 
-### 2) 답안 코드 확인하기
+`시작 S` 버튼을 클릭하면 아래와 같은 작업이 이루어져야 합니다.
 
-Vanilla JS 버전으로 완성한 코드는 `answer` 브랜치에 업로드 되어 있습니다. 로컬에서 Vanilla JS 답안 코드를 확인하고 싶으시면 아래의 단계를 따라주세요.
+- 스톱워치가 **시작**하고, 스톱워치의 시간이 올라갑니다.
+- 좌측의 `리셋 L` 버튼이 `랩 L` 버튼으로, 우측의 `시작 S` 버튼이 `중단 S` 버튼으로 변경됩니다. 라벨 뿐만 아니라 버튼의 스타일도 사진과 동일하게 변경되어야 합니다. 붉은색 버튼의 class명은 bg-red-600을, 초록색 버튼의 class명은 bg-green-600을 사용해 주세요.
 
-1. 본 저장소를 fork 하거나, ZIP 파일로 다운로드 받은 후
-2. 아래 명령어로 원격의 answer 브랜치로 checkout 해주세요.
+`중단 S` 버튼을 클릭하면 아래와 같은 작업이 이루어져야 합니다.
 
-```
-git checkout -t origin/answer
-```
+- 스톱워치가 **일시 정지**되고, 스톱워치의 시간이 멈춥니다.
+- 좌측의 `랩 L` 버튼이 `리셋 L` 버튼으로, 우측의 `중단 S` 버튼이 `시작 S` 버튼으로 변경됩니다. 라벨 뿐만 아니라 버튼의 스타일도 사진과 동일하게 변경되어야 합니다. 붉은색 버튼의 class명은 bg-red-600을, 초록색 버튼의 class명은 bg-green-600을 사용해 주세요.
 
-1. 아래 명령어로 의존성 라이브러리들을 설치해주세요. (main 브랜치에서 이미 설치했다면 재설치는 불필요합니다.)
+**2. 시간 포맷팅 구현**
 
-```
-npm install
-# 또는
-yarn install
-```
+스톱워치 모듈에서 내려받은 centisecond는 다음과 같은 포맷을 가져야 합니다.
 
-### 3) React 버전 코드 확인하기
+아래와 같은 포맷을 가지도록 스톱워치의 시간 출력 형태를 변경해주세요.
 
-React 버전의 보일러 플레이트와 답안 코드는 별도의 저장소인 [mini-stopwatch-react](https://github.com/hanameee/mini-stopwatch-react)에 업로드 되어 있습니다.
+> [분]:[초].[100/1 초 = centisecond]
+> 
 
-해당 저장소의 README.md 파일을 참고해주세요.
+- 예시1) 355 centisecond = 00:03.55
+- 예시2) 6000 centisecond = 01:00.00
+- 예시3) 8540 centisecond = 01:25.40
 
-## ✅ 요구사항
+**3. 랩 기능**
 
-본 저장소의 `wiki`에서 요구사항을 확인하실 수 있습니다.
+`랩 L` 버튼을 클릭하면 아래와 같은 작업이 이루어져야 합니다.
 
--   [링크](https://github.com/hanameee/mini-stopwatch/wiki/요구사항)
+- Lap Count가 함께 명시된 랩이 하나씩 기록됩니다.
+- 최신 Lap이 순서대로 맨 위에 추가됩니다.
 
-## 🖥 데모 페이지
+**4. 리셋 기능**
 
--   [링크](https://hanameee.github.io/mini-stopwatch/src)
+`리셋 L` 버튼을 클릭하면 아래와 같은 작업이 이루어져야 합니다.
 
-![image-20220109000429346](https://user-images.githubusercontent.com/25149664/148838281-528cd43d-a21a-4040-bb87-164b1dc701f2.png)
+- 스톱워치의 시간이 초기화 됩니다. (00:00.00)
+- 모든 랩이 사라집니다.
+
+**5. 키보드 조작 기능**
+
+버튼을 키보드로 조작할 수 있도록 해야 합니다.
+
+키보드 L: `랩 L`, `리셋 L` 키보드 S: `시작 S`, `중단 S`
+
+**6. 최단, 최장 기록 강조 효과**
+
+Lap 중 최장 Lap 기록은 붉은색으로 (text-red-600), 최단 Lap 기록은 초록색으로 (text-green-600) 표시되어야 합니다.
