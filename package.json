@@ -1,0 +1,22 @@
+{
+    "name": "mini-stopwatch",
+    "version": "1.0.0",
+    "description": "미니 사전과제 2. 스톱워치 - for FastCampus 30개 프로젝트로 배우는 프론트엔드 웹 개발 (with React)",
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/hanameee/mini-stopwatch.git"
+    },
+    "author": "hanameee",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/hanameee/mini-stopwatch/issues"
+    },
+    "homepage": "https://github.com/hanameee/mini-stopwatch#readme",
+    "dependencies": {},
+    "devDependencies": {
+        "eslint": "^8.6.0",
+        "eslint-config-prettier": "^8.3.0",
+        "prettier": "^2.5.1"
+    }
+}
